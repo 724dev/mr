@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageReactor_PageAuthorization::mr"
+             title="Plumtree Modules"
+             module="MageReactor_PageAuthorization"
+             sortOrder="13"
+             dependsOnModule="MageReactor_PageAuthorization"
+             resource="MageReactor_PageAuthorization::mr"/>
+
+        <add id="MageReactor_PageAuthorization::mr_page_authorization" title="Page Authorization"
+             module="MageReactor_PageAuthorization"
+             parent="MageReactor_PageAuthorization::mr"
+             sortOrder="50"
+             resource="MageReactor_PageAuthorization::page_authorization"/>
+
+        <add id="MageReactor_PageAuthorization::items" title="Manage Page Authorization"
+             module="MageReactor_PageAuthorization" parent="MageReactor_PageAuthorization::mr_page_authorization" sortOrder="0"
+             action="mr_page_authorization/item/index" resource="MageReactor_PageAuthorization::items"/>
+    </menu>
+</config>
