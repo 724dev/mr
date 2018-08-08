@@ -41,6 +41,7 @@ class Collection extends AbstractCollection
 	{
 		$entityMetadata = $this->metadataPool->getMetadata(ItemInterface::class);
 		$this->joinStoreRelationTable('mr_page_authorization_store', $entityMetadata->getLinkField());
+		$this->joinCmsPagesRelationTable('mr_page_authorization_cms_pages', $entityMetadata->getLinkField());
 	}
 }
 

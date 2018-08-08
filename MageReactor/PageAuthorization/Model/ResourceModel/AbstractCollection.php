@@ -116,6 +116,18 @@ class AbstractCollection extends \Magento\Framework\Model\ResourceModel\Db\Colle
 		parent::_renderFiltersBefore();
 	}
 
+	protected function joinCmsPagesRelationTable($tableName, $linkField)
+	{	
+		$this->getSelect()->join(
+			['cms_page' => $this->getTable($tableName)],
+			'main_table.' . $linkField . ' = store_table.' . $linkField,
+			[]
+		)->group(
+			'main_table.' . $linkField
+		);
+		parent::_renderFiltersBefore();
+	}
+
 	public function getSelectCountSql()
 	{
 		$countSelect = parent::getSelectCountSql();
