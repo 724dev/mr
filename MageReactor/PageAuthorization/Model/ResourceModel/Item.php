@@ -32,6 +32,8 @@ class Item extends AbstractDb
     ) {
         parent::__construct($context, $connectionName);
         $this->_itemStoreTable = "mr_page_authorization_store";
+        $this->_itemCmsPagesTable = "mr_page_authorization_cms_pages";
+        $this->_itemCategoryPagesTable = "mr_page_authorization_categories";
         $this->_storeManager = $storeManager;
         $this->dateTime = $dateTime;
         $this->entityManager = $entityManager;
@@ -66,6 +68,46 @@ class Item extends AbstractDb
                 $connection->insertOnDuplicate($this->_itemStoreTable,[
                     "item_id" => $object->getId(),
                     "store_id" => $storeId
+                ], []);
+            }
+        }
+
+        if( $object->getId() && !empty($object->getCmsPageId())){
+            $cmsPageIds = $object->getCmsPageId();
+            $connection = $this->getConnection();
+            $condition = [
+                'item_id= ?' => $object->getId(),
+            ];
+            $connection->delete($this->_itemCmsPagesTable, $condition);
+            $condition = [
+                'item_id= ?' => $object->getId(),
+                'cms_page_id IN (?)' => $cmsPageIds,
+            ];
+            $connection->delete($this->_itemCmsPagesTable, $condition);
+            foreach ($cmsPageIds as $cmsPageId) {
+                $connection->insertOnDuplicate($this->_itemCmsPagesTable,[
+                    "item_id" => $object->getId(),
+                    "cms_page_id" => $cmsPageId
+                ], []);
+            }
+        }
+
+        if( $object->getId() && !empty($object->getCategoryId())){
+            $categoryIds = $object->getCategoryId();
+            $connection = $this->getConnection();
+            $condition = [
+                'item_id= ?' => $object->getId(),
+            ];
+            $connection->delete($this->_itemCategoryPagesTable, $condition);
+            $condition = [
+                'item_id= ?' => $object->getId(),
+                'category_id IN (?)' => $categoryIds,
+            ];
+            $connection->delete($this->_itemCategoryPagesTable, $condition);
+            foreach ($categoryIds as $categoryId) {
+                $connection->insertOnDuplicate($this->_itemCategoryPagesTable,[
+                    "item_id" => $object->getId(),
+                    "category_id" => $categoryId
                 ], []);
             }
         }

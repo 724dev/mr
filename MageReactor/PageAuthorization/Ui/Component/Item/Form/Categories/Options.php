@@ -72,6 +72,10 @@ class Options implements OptionSourceInterface
 
             $this->categoriesTree = $categoryById[CategoryModel::TREE_ROOT_ID]['optgroup'];
         }
+        // echo '<pre>';
+
+        // print_r($this->categoriesTree);
+        // exit();
 
         return $this->categoriesTree;
     }
