@@ -119,8 +119,20 @@ class AbstractCollection extends \Magento\Framework\Model\ResourceModel\Db\Colle
 	protected function joinCmsPagesRelationTable($tableName, $linkField)
 	{	
 		$this->getSelect()->join(
-			['cms_page' => $this->getTable($tableName)],
-			'main_table.' . $linkField . ' = store_table.' . $linkField,
+			['cms_page_table' => $this->getTable($tableName)],
+			'main_table.' . $linkField . ' = cms_page_table.' . $linkField,
+			[]
+		)->group(
+			'main_table.' . $linkField
+		);
+		parent::_renderFiltersBefore();
+	}
+
+	protected function joinCategoryRelationTable($tableName, $linkField)
+	{	
+		$this->getSelect()->join(
+			['category_table' => $this->getTable($tableName)],
+			'main_table.' . $linkField . ' = category_table.' . $linkField,
 			[]
 		)->group(
 			'main_table.' . $linkField

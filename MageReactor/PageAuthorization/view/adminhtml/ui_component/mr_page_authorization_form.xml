@@ -38,11 +38,11 @@
         </argument>
     </dataSource>
 
-    <fieldset name="general">
+    <fieldset name="page_accessiblity_settings">
     	<argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
             	<item name="collapsible" xsi:type="boolean">false</item>
-                <item name="label" xsi:type="string" translate="true">General</item>
+                <item name="label" xsi:type="string" translate="true">Page Accessiblity Settings</item>
             </item>
         </argument>
 
@@ -57,6 +57,21 @@
 	           </item>
 	       </argument>
        </field>
+
+       <field name="customer_group_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Customer\Model\Customer\Source\Group</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Groups</item>
+                    <item name="dataScope" xsi:type="string">customer_group_ids</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+
     </fieldset>
 
     <fieldset name="page">
@@ -96,7 +111,7 @@
 	        </argument>
     	</field>
 
-        <field name="cms_page">
+        <field name="cms_page_id">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">MageReactor\PageAuthorization\Ui\Component\Item\Form\CmsPages\Options</item>
                 <item name="config" xsi:type="array">

@@ -62,7 +62,7 @@
 
             <filterSelect name="store_id">
                 <argument name="optionsProvider" xsi:type="configurableObject">
-                    <argument name="class" xsi:type="string">MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns\Stores</argument>
+                    <argument name="class" xsi:type="string">MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns\Store\Options</argument>
                 </argument>
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
@@ -79,7 +79,7 @@
 
             <filterSelect name="cms_page_id">
                 <argument name="optionsProvider" xsi:type="configurableObject">
-                    <argument name="class" xsi:type="string">MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns\CmsPages</argument>
+                    <argument name="class" xsi:type="string">MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns\CmsPages\Options</argument>
                 </argument>
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
@@ -89,6 +89,23 @@
                         </item>
                         <item name="dataScope" xsi:type="string">cms_page_id</item>
                         <item name="label" xsi:type="string" translate="true">Cms Pages</item>
+                        <item name="captionValue" xsi:type="string">0</item>
+                    </item>
+                </argument>
+            </filterSelect>
+
+            <filterSelect name="category_id">
+                <argument name="optionsProvider" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns\Category\Options</argument>
+                </argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">${ $.parentName }</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">componentType = column, index = ${ $.index }:visible</item>
+                        </item>
+                        <item name="dataScope" xsi:type="string">category_id</item>
+                        <item name="label" xsi:type="string" translate="true">Category</item>
                         <item name="captionValue" xsi:type="string">0</item>
                     </item>
                 </argument>
@@ -154,12 +171,22 @@
             </argument>
         </column>
 
-        <column name="cms_page_id">
+        <column name="cms_page_id" class="MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns\CmsPages">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="sortable" xsi:type="boolean">false</item>
                     <item name="label" xsi:type="string" translate="true">Cms Pages</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="category_id" class="MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns\Category">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Category</item>
                 </item>
             </argument>
         </column>

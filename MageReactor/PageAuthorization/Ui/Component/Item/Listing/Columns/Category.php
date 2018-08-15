@@ -4,15 +4,15 @@ namespace MageReactor\PageAuthorization\Ui\Component\Item\Listing\Columns;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
-use Magento\Cms\Model\Page as PageModel;
+use Magento\Catalog\Model\Category as CategoryModel;
 
-class CmsPages extends Column
+class Category extends Column
 {
 
-    protected $pageModel;
+    protected $categoryModel;
 
     public function __construct(        
-        PageModel $pageModel,
+        CategoryModel $categoryModel,
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         array $components = [],
@@ -25,7 +25,7 @@ class CmsPages extends Column
             $data
         );
 
-        $this->pageModel = $pageModel;
+        $this->categoryModel = $categoryModel;
     }
 
     public function prepareDataSource(array $dataSource)
@@ -41,11 +41,11 @@ class CmsPages extends Column
     protected function prepareItem(array $item)
     {
         $content = '';
-        if( isset($item['cms_page_id']) && is_array( $item['cms_page_id'] )){
-            foreach($item['cms_page_id'] as $key => $cmsPageId){
-                $item['cms_page_id'][$key] = 'ID: '. $cmsPageId .' ' . $this->pageModel->load($cmsPageId)->getTitle();
+        if( isset($item['category_id']) && is_array( $item['category_id'] )){
+            foreach($item['category_id'] as $key => $categoryId){
+                $item['category_id'][$key] = 'ID: '. $categoryId .' ' . $this->categoryModel->load($categoryId)->getName();
             }
-            $content = $content . implode('<br/>', $item['cms_page_id']);
+            $content = $content . implode('<br/>', $item['category_id']);
         }
         return $content;
     }
